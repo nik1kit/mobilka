@@ -69,7 +69,7 @@ class NewProfileScreen extends StatelessWidget {
                           "09:41",
                           style: TextStyle(
                             fontFamily: "Nunito",
-                            fontSize: MediaQuery.of(context).size.width * 0.035,
+                            fontSize: MediaQuery.of(context).size.height * 0.02,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -80,7 +80,8 @@ class NewProfileScreen extends StatelessWidget {
                           children: [
                             Image.asset(
                               "lib/assets/icons/Wifi.png",
-                              width: MediaQuery.of(context).size.width * 0.06,
+                              width: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.015,
@@ -88,7 +89,8 @@ class NewProfileScreen extends StatelessWidget {
 
                             Image.asset(
                               "lib/assets/icons/Battery.png",
-                              width: MediaQuery.of(context).size.width * 0.06,
+                              width: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             SizedBox(
                               width: MediaQuery.of(context).size.width * 0.015,
@@ -96,7 +98,8 @@ class NewProfileScreen extends StatelessWidget {
 
                             Image.asset(
                               "lib/assets/icons/Mobile Signal.png",
-                              width: MediaQuery.of(context).size.width * 0.06,
+                              width: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                           ],
                         ),
