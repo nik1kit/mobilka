@@ -9,33 +9,46 @@ class NewProfileScreen extends StatelessWidget {
       backgroundColor: Colors.white,
 
       // ---- Нижнее меню ----
-      bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          border: Border(top: BorderSide(color: Colors.grey, width: 0.2)),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Image.asset("lib/assets/icons/home.png", width: 30, height: 30),
-            Row(
+      bottomNavigationBar: LayoutBuilder(
+        builder: (context, constraints) {
+          final screenWidth = constraints.maxWidth;
+
+          final paddingVertical = screenWidth * 0.02;
+
+          return Container(
+            padding: EdgeInsets.symmetric(vertical: paddingVertical),
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              border: Border(top: BorderSide(color: Colors.grey, width: 0.2)),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Image.asset(
-                  "lib/assets/icons/profile.png",
-                  width: 30,
-                  height: 30, // прозрачная активная иконка
+                _navButton(
+                  context: context,
+                  iconPath: "lib/assets/icons/home.png",
+                  active: false,
+                  onTap: () {},
                 ),
-                SizedBox(width: 5), // небольшой отступ между иконкой и текстом
-                Text(
-                  'Профили',
-                  style: TextStyle(fontSize: 16, color: Colors.blue),
+
+                _navButton(
+                  context: context,
+                  iconPath: "lib/assets/icons/profile.png",
+                  active: true,
+                  label: "Профили",
+                  onTap: () {},
+                ),
+
+                _navButton(
+                  context: context,
+                  iconPath: "lib/assets/icons/calendar.png",
+                  active: false,
+                  onTap: () {},
                 ),
               ],
             ),
-            Image.asset("lib/assets/icons/calendar.png", width: 30, height: 30),
-          ],
-        ),
+          );
+        },
       ),
 
       body: Padding(
@@ -51,61 +64,71 @@ class NewProfileScreen extends StatelessWidget {
                   children: [
                     // Статус-бар: время + иконки
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "09:41",
                           style: TextStyle(
                             fontFamily: "Nunito",
-                            fontSize: 14,
+                            fontSize: MediaQuery.of(context).size.width * 0.035,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
+
+                        Spacer(), // растягивает пространство между часами и иконками
+
                         Row(
                           children: [
                             Image.asset(
                               "lib/assets/icons/Wifi.png",
-                              width: 20,
-                              height: 20,
+                              width: MediaQuery.of(context).size.width * 0.06,
                             ),
-                            SizedBox(width: 5),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.015,
+                            ),
+
                             Image.asset(
                               "lib/assets/icons/Battery.png",
-                              width: 20,
-                              height: 20,
+                              width: MediaQuery.of(context).size.width * 0.06,
                             ),
-                            SizedBox(width: 5),
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.015,
+                            ),
+
                             Image.asset(
                               "lib/assets/icons/Mobile Signal.png",
-                              width: 20,
-                              height: 20,
+                              width: MediaQuery.of(context).size.width * 0.06,
                             ),
                           ],
                         ),
                       ],
                     ),
 
-                    const SizedBox(height: 10),
+                    SizedBox(height: MediaQuery.of(context).size.width * 0.025),
 
-                    // Заголовок + кнопка назад
                     Row(
                       children: [
                         IconButton(
                           icon: Image.asset(
                             "lib/assets/icons/arrow.png",
-                            width: 24,
-                            height: 24,
+                            width: MediaQuery.of(context).size.width * 0.06,
                           ),
                           onPressed: () => Navigator.pop(context),
                         ),
-                        const SizedBox(width: 10),
-                        const Text(
-                          "Новый профиль",
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontFamily: "Nunito",
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+
+                        SizedBox(
+                          width: MediaQuery.of(context).size.width * 0.03,
+                        ),
+
+                        Expanded(
+                          child: Text(
+                            "Новый профиль",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontFamily: "Nunito",
+                              fontWeight: FontWeight.bold,
+                              fontSize:
+                                  MediaQuery.of(context).size.width * 0.05,
+                            ),
                           ),
                         ),
                       ],
@@ -115,103 +138,113 @@ class NewProfileScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 10),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.025),
 
-            const Text(
-              "Проверьте данные и создайте\nновый профиль",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontFamily: "Nunito",
-                fontSize: 15,
-                color: Color.fromARGB(255, 0, 0, 0),
-                fontWeight: FontWeight.w700,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width * 0.08,
+                vertical: MediaQuery.of(context).size.height * 0.02,
+              ),
+              child: Text(
+                "Проверьте данные и создайте\nновый профиль",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                  fontWeight: FontWeight.w700,
+                  fontSize: MediaQuery.of(context).size.width * 0.045,
+                  color: Colors.black,
+                ),
               ),
             ),
 
-            const SizedBox(height: 25),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.025),
 
-            // ---- Блок с аватаром + кнопки + имя ----
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Аватар слева ✔
+                // Аватар
                 CircleAvatar(
-                  radius: 30,
+                  radius: MediaQuery.of(context).size.width * 0.08,
                   backgroundColor: Colors.blue.shade50,
                   child: Image.asset(
                     "lib/assets/icons/profile.png",
-                    width: 30,
-                    height: 30, // прозрачная активная иконка
+                    width: MediaQuery.of(context).size.width * 0.06,
                   ),
                 ),
 
-                const SizedBox(width: 20),
+                SizedBox(width: MediaQuery.of(context).size.width * 0.05),
 
-                // Блок справа (Пациент/Сын + имя)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // Роли
-                    Row(
-                      children: [
-                        _roleButton("Пациент", false),
-                        const SizedBox(width: 12),
-                        _roleButton("Сын", true),
-                      ],
-                    ),
-
-                    const SizedBox(height: 12),
-
-                    // Имя
-                    const Text(
-                      "Чехов Андрей Львович",
-                      style: TextStyle(
-                        fontFamily: "Nunito",
-                        fontWeight: FontWeight.w700,
-                        fontSize: 18,
+                // Контент справа
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      // Кнопки ролей
+                      Row(
+                        children: [
+                          _roleButton(context, "Пациент", false),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.03,
+                          ),
+                          _roleButton(context, "Сын", true),
+                        ],
                       ),
-                    ),
-                  ],
+
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.015,
+                      ),
+
+                      // Имя
+                      Text(
+                        "Чехов Андрей Львович",
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontFamily: "Nunito",
+                          fontWeight: FontWeight.w700,
+                          fontSize: MediaQuery.of(context).size.width * 0.048,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
 
-            const SizedBox(height: 30),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.025),
 
-            _infoBlock("Дата рождения", "20.01.2019"),
-            _infoBlock("Пол", "Мужской"),
-            _infoBlock("Свидетельство о рождении", "VIIЮК 123456"),
-            _infoBlock("Полис ОМС", "1000000000000011"),
-            _infoBlock("СНИЛС", "100-100-100 10"),
+            _infoBlock(context, "Дата рождения", "20.01.2019"),
+            _infoBlock(context, "Пол", "Мужской"),
+            _infoBlock(context, "Свидетельство о рождении", "VIIЮК 123456"),
+            _infoBlock(context, "Полис ОМС", "1000000000000011"),
+            _infoBlock(context, "СНИЛС", "100-100-100 10"),
 
-            const SizedBox(height: 30),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.025),
 
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                minimumSize: const Size(0, 50), // ширина минимальная
+                padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.08,
+                  vertical: MediaQuery.of(context).size.width * 0.03,
+                ),
                 backgroundColor: Colors.blueAccent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
               onPressed: () {},
-              child: const Padding(
-                padding: EdgeInsets.symmetric(
-                  horizontal: 32,
-                ), // внутренние отступы
-                child: Text(
-                  "Создать новый профиль",
-                  style: TextStyle(
-                    fontFamily: "Nunito",
-                    fontWeight: FontWeight.bold,
-                    fontSize: 17,
-                    color: Colors.white,
-                  ),
+              child: Text(
+                "Создать новый профиль",
+                style: TextStyle(
+                  fontFamily: "Nunito",
+                  fontWeight: FontWeight.bold,
+                  fontSize: MediaQuery.of(context).size.width * 0.04,
+                  color: Colors.white,
                 ),
               ),
             ),
 
-            const SizedBox(height: 40),
+            SizedBox(height: MediaQuery.of(context).size.width * 0.025),
           ],
         ),
       ),
@@ -220,26 +253,26 @@ class NewProfileScreen extends StatelessWidget {
 
   // --- Вспомогательные виджеты ---
 
-  Widget _roleButton(String text, bool isActive) {
+  Widget _roleButton(BuildContext context, String text, bool isActive) {
+    final double w = MediaQuery.of(context).size.width;
+
     return Container(
       padding: EdgeInsets.symmetric(
-        vertical: 6,
-        horizontal: isActive
-            ? 12
-            : 0, // <-- горизонтальный padding только для активной роли
+        vertical: w * 0.015,
+        horizontal: isActive ? w * 0.03 : 0,
       ),
       decoration: BoxDecoration(
         color: isActive
             ? Colors.lightBlue.withOpacity(0.1)
             : Colors.transparent,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(w * 0.03),
       ),
       child: Text(
         text,
         style: TextStyle(
           fontFamily: "Nunito",
           fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
-          fontSize: 14,
+          fontSize: w * 0.035,
           color: isActive
               ? Colors.blue
               : const Color.fromARGB(255, 153, 153, 153),
@@ -248,26 +281,32 @@ class NewProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget _infoBlock(String label, String value) {
+  Widget _infoBlock(BuildContext context, String label, String value) {
+    final size = MediaQuery.of(context).size;
+
     return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
+      padding: EdgeInsets.only(bottom: size.height * 0.02),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // Лейбл
           Text(
             label,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: "Nunito",
-              fontSize: 14,
-              color: Color(0xFF9F9F9F),
+              fontSize: size.width * 0.035, // адаптивный размер
+              color: const Color(0xFF9F9F9F),
             ),
           ),
-          const SizedBox(height: 5),
+
+          SizedBox(height: size.height * 0.006),
+
+          // Значение
           Text(
             value,
-            style: const TextStyle(
+            style: TextStyle(
               fontFamily: "Nunito",
-              fontSize: 16,
+              fontSize: size.width * 0.042, // адаптивный шрифт
               color: Colors.black,
               fontWeight: FontWeight.w700,
             ),
@@ -276,4 +315,51 @@ class NewProfileScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget _navButton({
+  required BuildContext context,
+  required String iconPath,
+  required bool active,
+  required VoidCallback onTap,
+  String? label,
+}) {
+  final double w = MediaQuery.of(context).size.width;
+
+  return GestureDetector(
+    onTap: onTap,
+    child: Container(
+      padding: EdgeInsets.symmetric(vertical: w * 0.015, horizontal: w * 0.03),
+      decoration: BoxDecoration(
+        color: active
+            ? Colors.lightBlue.withOpacity(0.1) // фон как в _roleButton
+            : Colors.transparent,
+        borderRadius: BorderRadius.circular(w * 0.03),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Image.asset(
+            iconPath,
+            width: w * 0.06,
+            height: w * 0.06,
+            color: active ? Colors.blue : Colors.grey,
+          ),
+
+          if (label != null) ...[
+            SizedBox(width: w * 0.02),
+            Text(
+              label,
+              style: TextStyle(
+                fontFamily: "Nunito",
+                fontSize: w * 0.035,
+                fontWeight: active ? FontWeight.w700 : FontWeight.w500,
+                color: active ? Colors.blue : Colors.grey,
+              ),
+            ),
+          ],
+        ],
+      ),
+    ),
+  );
 }
