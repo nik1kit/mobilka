@@ -248,6 +248,26 @@ class NewProfileScreen extends StatelessWidget {
             ),
 
             SizedBox(height: MediaQuery.of(context).size.width * 0.025),
+
+            // Container(
+            //   padding: EdgeInsets.all(16),
+            //   margin: EdgeInsets.symmetric(horizontal: 20),
+            //   decoration: BoxDecoration(
+            //     color: Colors.blue.withOpacity(0.05),
+            //     borderRadius: BorderRadius.circular(12),
+            //   ),
+            //   child: Center(
+            //     child: Text(
+            //       "Кудряшов, Семенов",
+            //       style: TextStyle(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w600,
+            //         fontFamily: "Nunito",
+            //         color: Colors.blue,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
